@@ -90,11 +90,13 @@ if ($id > 0)
 					$lim = $ncnt;
 				for($i = 0; $i < $lim; $i++)
 					cot_tag($new_tags[$i], $id, 'showcase');
-				
+
 				cot_message('Updated_successfully');
 			}
 			else
 				cot_error('Database_error');
+			// Get back to display
+			cot_redirect(cot_url('plug', 'e=showcase&id='.$id));
 		}
 	}
 
@@ -118,8 +120,9 @@ if ($id > 0)
 	{
 		$db->update($db_showcase, array('sc_active' => 1), "sc_id = $id");
 		$row['sc_active'] = 1;
+		cot_redirect(cot_url('plug', 'e=showcase&id='.$id));
 	}
-	
+
 	$out['subtitle'] = $L['Site_showcase'] . ' - ' . $domain;
 
 	// Display the item and comments
@@ -174,6 +177,7 @@ else
 				}
 				else
 					cot_error('Database_error');
+				cot_redirect(cot_url('plug', 'e=showcase&id='.$item_id));
 			}
 		}
 	}
@@ -215,7 +219,7 @@ else
 		ORDER BY $order
 		LIMIT $d, " . $cfg['plugin']['showcase']['per_page'];
 	$res = $db->query($query);
-	
+
 	$out['subtitle'] = $L['Site_showcase'];
 
 	// Display the items
@@ -281,7 +285,7 @@ else
 		'BYDATE_URL' => cot_url('plug','e=showcase' . $url_t)
 	));
 
-	
+
 	if ($usr['auth_write'])
 	{
 		// Validation queue
@@ -337,7 +341,7 @@ function sc_import($domain = '')
 		$in['sc_domain'] = $domain;
 		$in['sc_title'] = cot_import('title', 'P', 'TXT');
 		// Get title from page if empty
-		if (empty($in['title'])
+		if (empty($in['sc_title'])
 			&& preg_match('#<title>(.+?)</title>#i', $data, $mt))
 			$in['sc_title'] = mb_substr($mt[1], 0,
 				$cfg['plugin']['showcase']['length']);
@@ -371,8 +375,8 @@ function sc_display($domain, $edit = false, $comments = false)
 	$comments_link = cot_comments_link('plug', 'e=showcase&id=' . $item_code, 'showcase', $item_code);
 	$comments_display = cot_comments_display('showcase', $item_code);
 	$comments_count = cot_comments_count('showcase', $item_code);
-	
-	list ($ratings_display, $ratings_average) = cot_ratings_display('showcase', $item_code);
+
+	//list ($ratings_display, $ratings_average) = cot_ratings_display('showcase', $item_code);
 
 	// Clickable tag list
 	$tags = cot_tag_list($item_code, 'showcase');
