@@ -18,4 +18,5 @@ $L['Tags_input'] = 'Tags, comma separated';
 $L['Updated_successfully'] = 'Updated successfully';
 $L['Validate'] = 'Validate';
 $L['Validation_queue'] = 'Validation Queue';
-?>
+$L['For_validation'] = 'for validation';
+$Ls['Showcase_sites'] = 'site,sites';

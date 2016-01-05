@@ -27,4 +27,7 @@ $L['Tags_input'] = 'Теги, через запятую';
 $L['Updated_successfully'] = 'Успешно обновлено';
 $L['Validate'] = 'Проверено';
 $L['Validation_queue'] = 'На проверку';
-?>
+$L['For_validation'] = 'на проверку';
+$Ls['Showcase_sites'] = 'сайт,сайта,сайтов';
+
+
