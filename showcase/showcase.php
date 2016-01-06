@@ -19,9 +19,6 @@ require_once cot_incfile('tags', 'plug');
 require_once cot_incfile('comments', 'plug');
 require_once cot_incfile('ratings', 'plug');
 
-// STW JavaScript
-cot_rc_link_file('http://www.shrinktheweb.com/scripts/pagepix.js');
-
 // Import a domain ID
 $id = (int) cot_import('id', 'G', 'INT');
 
@@ -395,6 +392,7 @@ function sc_display($domain, $edit = false, $comments = false)
 	}
 
 	// Assign tags
+	$url_encoded = urlencode($domain);
 	$t->assign(array(
 		'ITEM_ID' => $row['sc_id'],
 		'ITEM_URL' => $url,
@@ -405,9 +403,7 @@ function sc_display($domain, $edit = false, $comments = false)
 				. $cfg['plugin']['showcase']['length'] . '" value="'
 				. $title . '" />' : $title,
 		'ITEM_IMAGE' => <<<HTM
-<script type="text/javascript">
-stw_pagepix('$url', '{$cfg['plugin']['showcase']['access_key']}', 'lg', 0);
-</script>
+<img src="http://free.pagepeeker.com/v2/thumbs.php?size=m&url={$url_encoded}" width="200" height="150" alt="{$row['sc_domain']} screenshot" />
 HTM
 		,
 		'ITEM_OWNER' => cot_build_user($row['sc_owner'], $row['user_name']),

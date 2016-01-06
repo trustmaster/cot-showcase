@@ -22,9 +22,10 @@ if (cot_auth('plug', 'showcase', 'A'))
 	if($sc_cnt > 0)
 	{
 		require_once cot_langfile('showcase', 'plug');
-		$notice_seperator = !empty($out['notices']) ? ' - ' : '';
-		$out['notices'] .= $notice_seperator . cot_rc_link(cot_url('plug', 'e=showcase'), $L['Showcase'].': '.$sc_cnt);
+		if (!is_array($out['notices_array'])) $out['notices_array'] = array();
+		$notice_item = array();
+		$notice_item[0] = cot_url('plug', 'e=showcase');
+		$notice_item[1] = cot_declension($sc_cnt, 'Showcase_sites') . ' ' . $L['For_validation'];
+		$out['notices_array'][] = $notice_item;
 	}
 }
-
-?>
